@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %} 
+{% block auth_content %}
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Alleppey Horizons</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link  type="image/x-icon" rel="icon" href="{% static 'img/favicon.ico' %}">
+  <link href="{% static 'img/_5613fa34-808b-4508-a716-956c7af28c05.jpg' %}" rel="apple-touch-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Gp
+  * Updated: Nov 25 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+<style>
+    .dropdowne {
+        margin-left: 40px;
+    }
+
+    .logo {
+        white-space: nowrap;
+    }
+
+    .fixed-top {
+        right: 91px !important; /* Use !important to force the style */
+    }
+</style>
+</head>
+
+<body data-bs-theme="dark">
+  
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+  
+    <div class="container d-flex align-items-center justify-content-lg-between"  style="margin-left: 73.5px;">
+
+        <h1 class="logo me-auto me-lg-0"><a href="{% url 'home' %}">Alleppey Horizons<span>.</span></a></h1>
+      
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#about">About</a></li>
+        <li><a class="nav-link scrollto" href="#services">Services</a></li>
+        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'account' %}">Profile</a></li>
+        <li class="dropdown"><a href="#"><span>Bookings</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li class="dropdown"><a href="#"><span>Houseboat</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="{% url 'deluxe_bookings' %}">Deluxe Houseboat</a></li>
+                <li><a href="{% url 'premium_bookings' %}">Premium Houseboat</a></li>
+                <li><a href="{% url 'luxury_bookings' %}">Luxury Houseboat</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'user_bookings' %}">Shikara</a></li>
+            <li><a href="{% url 'ayurveda_bookings' %}">Ayurveda</a></li>
+            <li class="dropdown"><a href="#"><span>Hotels & Resorts</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="{% url 'hotel_bookings' %}">Hotels</a></li>
+                <li><a href="{% url 'resort_bookings' %}">Resorts</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+    <div class="dropdowne" id="dynamic-content">
+      <a href="#" class="get-started-btn scrollto">
+        {% if user.is_authenticated %}
+          Welcome, {{ user.username }}
+        {% else %}
+          Sign Up or Sign In
+        {% endif %}
+      </a>
+
+      <div class="dropdowne-content" id="dynamic-width">
+        {% if user.is_authenticated %}
+          <!-- Create a form to perform the logout -->
+          <a href="{% url 'app_logout' %}">Log out</a>
+        {% else %}
+          <a href="{% url 'signin' %}">Sign In</a>
+          <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="custom-switch-container">
+      <label class="form-check form-switch-mx-4" onclick="toggleDarkMode()">
+        <i class="fas fa-adjust" id="themeIcon"></i> <!-- Adjust icon for theme toggle -->
+      </label>
+    </div>
+  </div>
+</header><!-- End Header -->
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+ 
+  
+
+  <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-left justify-content-left">
+        <div class="video-container" data-aos="fade-up">
+            <video width="100%" height="auto" autoplay muted loop class="hero-video">
+                <source src="{% static 'img/Alleppey.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <h1 class="mb-5" style="position: absolute; z-index: 1; text-align: left; padding-left: 115px;">
+            <span class="d-block">
+                <br><br><br><br>Let's Enjoy Your
+            </span>
+            Trip In
+            <span class="typed-words"></span>
+        </h1>
+    </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <!-- Add more buttons for additional slides -->
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{% static 'img/houseboat.jpg' %}" class="d-block w-100" alt="Slide 1" height="421.8" width="1000">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'img/beach.jpg' %}" class="d-block w-100" alt="Slide 2" height="421.8" width="1000">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'img/ayurvedic-transformed_upscaled.jpg' %}" class="d-block w-100" alt="Slide 3" height="421.8" width="1000">
+                </div>
+                <!-- Add more carousel items with different images -->
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
+            <h3>Alleppey Horizons.</h3>
+            <p class="fst-italic">
+              Welcome to our tour agency nestled in the heart of Alappuzha, Kerala, where we curate unforgettable experiences amidst the serene backwaters and lush landscapes.
+            </p>
+            <ul>
+              <li><i class="ri-check-double-line"></i> Discover the essence of relaxation and tranquility aboard our traditional houseboats. </li>
+              <li><i class="ri-check-double-line"></i> Induldge in and experience the rich and deep historical places of Alleppey</li>
+              <li><i class="ri-check-double-line"></i> Relax in the ancient healing practices of Ayurveda with our rejuvenating massage services.</li>
+            </ul>
+            <p>
+              At our agency, we pride ourselves on crafting holistic experiences that blend relaxation, cultural immersion, and authentic encounters. Whether you seek tranquil moments on the backwaters, rejuvenation through Ayurvedic therapies, or a deeper connection with the local culture, we ensure a seamless and enriching journey through the enchanting landscapes of Alappuzha.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Clients Section ======= -->
+    <section id="features" class="features">
+  <div class="container" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+        <div id="feature-carousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#feature-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#feature-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#feature-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <!-- Add more buttons for additional slides -->
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static 'img/dance-forms-1024x682-1.webp' %}" class="d-block w-100" alt="Slide 1" height="472.8" >
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'img/cropped-1-transformed.webp' %}" class="d-block w-100" alt="Slide 2" height="472.8" width="1000">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'img/avin-cp-_Bo91Irw0-0-unsplash_11zon.webp' %}" class="d-block w-100" alt="Slide 3" height="472.8" width="1000">
+            </div>
+            <!-- Add more carousel items with different images -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#feature-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#feature-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+        <!-- Your existing feature content -->
+        <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-receipt"></i>
+          <h4>Backwater Bliss</h4>
+          <p>Explore Alappuzha's serene backwaters on a houseboat, immersing yourself in the charm of Kerala's unique waterways</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-cube-alt"></i>
+          <h4>Golden Beach Retreat</h4>
+          <p>Relax on Alappuzha's pristine beaches, enjoying the warm sun and gentle waves for a perfect beachside escape</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-images"></i>
+          <h4>Cultural Extravaganza</h4>
+          <p>Experience Alappuzha's rich culture through vibrant festivals, traditional art forms, and historic landmarks, providing a glimpse into the local traditions</p>
+        </div>
+        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+          <i class="bx bx-shield"></i>
+          <h4>Exotic Houseboat Cruises</h4>
+          <p>Cruise Alappuzha's backwaters in luxury aboard traditional houseboats, offering a unique blend of comfort and tradition for an unforgettable water journey</p>
+        </div>
+        <!-- End of existing feature content -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Features Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          
+          <h2>Services</h2>
+          <p>Check our Services</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><img src="/static/img/OIG2-removebg-preview.png" alt="Your Icon" style="width: 56px;height: 68px;padding-bottom: 20px;"></img></div>
+              <h4>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'houseboat' %}">Houseboat Harmony</a>
+                {% else %}
+                    <a href="{% url 'houseboat home' %}">Houseboat Harmony</a>
+                {% endif %}
+              </h4>
+              <p>Embark on a unique tourism adventure with our houseboat service—comfort and charm afloat for an unforgettable experience.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><img src="/static/img/3059478-200.png" alt="Your Icon" style="width:30px"></img></div>
+              <h4>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'ayurveda details' %}">Ayurveda Massage Bliss</a>
+                {% else %}
+                    <a href="{% url 'ayurveda home' %}">Ayurveda Massage Bliss</a>
+                {% endif %}
+              </h4>
+              <p> Immerse yourself in the profound healing of our Ayurveda massage—an exquisite blend of ancient techniques and serene ambiance, guiding you to a state of ultimate relaxation and rejuvenation.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="{% url 'page_development' %}"> Discover Alappuzha's Charm</a></h4>
+              <p>Experience the serene beauty of Alappuzha, the 'Venice of the East' with our travel and tour packages  </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><img src="/static/img/482852.png" alt="Your Icon" style="width:30px"></img></div>
+              <h4>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'hotels' %}">Luxury Stay In Alappuzha</a>
+                {% else %}
+                    <a href="{% url 'hotel_home' %}">Luxury Stay In Alappuzha</a>
+                {% endif %}
+              </h4>
+              <p>Experience unparalleled comfort in the heart of Alappuzha, where traditional charm meets modern luxury at our finest hotels.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><img src="/static/img/OIG3-removebg-preview.png" alt="Your Icon" style="width:50px"></div>
+              <h4>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'shikara' %}">Shikara Serenity Cove</a>
+                {% else %}
+                    <a href="{% url 'shikara home' %}">Shikara Serenity Cove</a>
+                {% endif %}
+              </h4>
+              <p>Cruise serenely in the elegance of Shikara's embrace and drown in ectasy.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-arch"></i></div>
+              <h4><a href="{% url 'page_development' %}">Landmarks</a></h4>
+              <p>Enjoy the hostorical and scenic landmarks showcasing  the rich heritage of alleppey.</p>
+            </div>
+          </div>
+
+        </div>
+        
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="text-center">
+          <h3>Discover Alleppey</h3>
+          <p>Kerala's enchanting coastal gem, famed for its picturesque backwaters and iconic houseboats. Immerse in vibrant culture, serene landscapes, and lively festivals for an unforgettable escape. Explore more of Alleppey's allure today!.</p>
+          <a class="cta-btn" href="{% url 'page_development' %}">Discover Alleppey</a>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>Check our Portfolio</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">Scenery</li>
+              <li data-filter=".filter-card">Culture</li>
+              <li data-filter=".filter-web">Travel</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/istockphoto-1266651692-612x612.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Serene Escape</h4>
+                <p>Houseboat</p>  
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/portfoli2.avif' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Wave-kissed Canvas</h4>
+                <p>Seaside</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/ALLEPPEY.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Glide Away</h4>
+                <p>Backwaters</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/alappuzha-culture.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Cultural Magnificence</h4>
+                <p>Heritage</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/photo-1663647690423-aebc47739cde.avif' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Heavenly</h4>
+                <p>Lush Landscape</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/chenda-7930107_640.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Famous Celebratory</h4>
+                <p>Flourishing Heritage</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/rice-field-8295148_640.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Tranquil Scenery</h4>
+                <p>Breathtaking sceneries</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/alappuzha-774928_1280.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Glorious Sunset</h4>
+                <p>Shoreline</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="{% static 'img/portfolio/istockphoto-1266674071-612x612.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Exceptional People</h4>
+                <p>Wondeful Community</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Counts Section ======= -->
+    
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="zoom-in">
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Alleppey Horizon made our trip to Alappuzha unforgettable with their impeccable planning and attention to detail. Highly recommended!
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Exceptional service from Alleppey Horizon! Their local expertise and personalized touch ensured a seamless and delightful travel experience throughout our journey.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Alleppey Horizon exceeded our expectations, offering a perfect blend of professionalism and warmth. Our Alappuzha journey was truly magical.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Kudos to Alleppey Horizon for crafting an enchanting Alappuzha itinerary. Their dedication to customer satisfaction shines through every aspect of the trip.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{% static 'img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Alleppey Horizon's commitment to excellence made our Alappuzha vacation extraordinary. Their passion for travel is evident in the fantastic memories they helped us create.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </div><!-- End testimonial item -->
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Team Section ======= 
+    <section id="team" class="team">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>Check our Team</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <div class="member-img">
+                <img src="{% static 'img/team/team-1.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="200">
+              <div class="member-img">
+                <img src="{% static 'img/team/team-2.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="300">
+              <div class="member-img">
+                <img src="{% static 'img/team/team-3.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="400">
+              <div class="member-img">
+                <img src="{% static 'img/team/team-4.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section> End Team Section -->
+
+    <!-- ======= Contact Section ======= -->
+
+<section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Contact</h2>
+            <p>Contact Us</p>
+        </div>
+
+        <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.783435781384!2d76.34259937633561!3d9.527535656658902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b088410c13e524f%3A0x4b0a9ade4c8dc65e!2sSouth%20Aryad%20Jumua%20Masjid!5e0!3m2!1sen!2sin!4v1704127874680!5m2!1sen!2sin" width="1400" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col-lg-4">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Location:</h4>
+                        <p>G8HW+2X9, pallimukku, Pallimuk, Alappuzha, Kerala 688006</p>
+                    </div>
+
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>Email:</h4>
+                        <p>info@example.com</p>
+                    </div>
+
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Call:</h4>
+                        <p>+1 5589 55488 55s</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 mt-5 mt-lg-0">
+                
+
+                {% if form_submitted %}
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script>
+                    $(document).ready(function() {
+                        $('html, body').animate({
+                            scrollTop: $("#contact").offset().top
+                        }, 2000);
+                    });
+                    </script>
+                {% endif %}
+
+                <form action="{% url 'contact' %}" method="post" role="form" class="php-email-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                </form>
+                <br>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Allepey Horizons<span>.</span></h3>
+              <p>
+                A108 Adam Street <br>
+                NY 535022, USA<br><br>
+                <strong>Phone:</strong> +1 5589 55488 55<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Alleppey Horizons</span></strong>. All Rights Reserved
+      </div>
+      
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/typed.js' %}"></script>
+    <script>
+        $(function() {
+            var typed = new Typed('.typed-words', {
+                strings: ["Alleppey.", " Venice of the East."],
+                typeSpeed: 80,
+                backSpeed: 80,
+                backDelay: 4000,
+                startDelay: 1000,
+                loop: true,
+                showCursor: true
+            });
+        });
+
+        
+    </script>
+
+    <script>
+      let dynamicWidth;
+      
+      window.addEventListener('load', function() {
+        const dynamicWidth = document.getElementById('dynamic-width');
+        const contentWidth = document.querySelector('.get-started-btn').offsetWidth;
+        dynamicWidth.style.minWidth = contentWidth + 'px';
+
+        // Close the dropdown when clicking outside of it
+        document.addEventListener('click', function(event) {
+          if (!event.target.closest('.get-started-btn') && !event.target.closest('#dynamic-width')) {
+            hideDropdown();
+          }
+        });
+
+        // Add an event listener for the transitionend event to handle visibility changes
+        dynamicWidth.addEventListener('transitionend', function() {
+          if (dynamicWidth.style.opacity === '0') {
+            dynamicWidth.style.visibility = 'hidden';
+          } else {
+            dynamicWidth.style.visibility = 'visible';
+          }
+        });
+      });
+
+      function showDropdown() {
+        dynamicWidth.style.opacity = 1;
+        dynamicWidth.style.transform = 'translateX(-50%) translateY(0)';
+        dynamicWidth.style.visibility = 'visible';
+      }
+      
+
+      function hideDropdown() {
+        dynamicWidth.style.opacity = 0;
+        dynamicWidth.style.transform = 'translateX(-50%) translateY(-5px)';
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+          var element = document.body;
+          var themeIcon = document.getElementById('themeIcon');
+
+          // Set the initial color and icon based on the current theme
+          if (element.dataset.bsTheme === "dark" || !element.dataset.bsTheme) {
+              themeIcon.classList.add('sun-icon', 'fa-sun');
+          } else {
+              themeIcon.classList.add('moon-icon', 'fa-moon');
+          }
+
+          element.dataset.bsTheme = "light";
+          updateTextColors(); // Call the function to set initial text colors
+      });
+
+      function toggleDarkMode() {
+          var element = document.body;
+          var themeIcon = document.getElementById('themeIcon');
+
+          if (element.dataset.bsTheme === "light" || !element.dataset.bsTheme) {
+              // Switch to dark mode
+              element.dataset.bsTheme = "dark";
+              themeIcon.classList.remove('fa-sun', 'sun-icon');
+              themeIcon.classList.add('fa-moon', 'moon-icon');
+          } else {
+              // Switch to light mode
+              element.dataset.bsTheme = "light";
+              themeIcon.classList.remove('fa-moon', 'moon-icon');
+              themeIcon.classList.add('fa-sun', 'sun-icon');
+          }
+
+          updateTextColors();
+      }
+
+      // Add a function to update text colors based on the theme
+      function updateTextColors() {
+          var isDarkMode = document.body.dataset.bsTheme === "dark";
+          var container = document.querySelector('.services');
+
+          if (isDarkMode) {
+              container.classList.add('dark-mode');
+          } else {
+              container.classList.remove('dark-mode');
+          }
+      }
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+{% endblock %}
+</html>

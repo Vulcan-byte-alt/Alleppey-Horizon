@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+    <!--Password matching-->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById("booking-form").addEventListener("submit", function(event) {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            // Check if the password is similar to the username
+            if (password.toLowerCase().includes(username.toLowerCase())) {
+                alert("Password should not be similar to the username.");
+                event.preventDefault(); // Prevents form submission if passwords are similar to the username
+                return;
+            }
+
+            // Check if the password is less than 8 characters
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters.");
+                event.preventDefault(); // Prevents form submission if the password is less than 8 characters
+                return;
+            }
+
+            // Check if the password contains common passwords
+            var commonPasswords = ["password", "123456", "qwerty", "abc123"];
+            if (commonPasswords.includes(password.toLowerCase())) {
+                alert("Password should not contain common passwords.");
+                event.preventDefault(); // Prevents form submission if the password contains common passwords
+                return;
+            }
+
+            // Check if the password is fully numeric
+            if (/^\d+$/.test(password)) {
+                alert("Password should not be fully numeric.");
+                event.preventDefault(); // Prevents form submission if the password is fully numeric
+                return;
+            }
+
+            // Check if the password and confirm password match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                event.preventDefault(); // Prevents form submission if passwords don't match
+                return;
+            }
+        });
+    });
+</script>
+    
+</head>
+
+<style media="screen">
+    h2{
+        font-family: "Great Vibes", cursive;
+        font-size: 40px;
+        font-weight: 100;
+    }
+
+    .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000; /* Change background color as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensure it's above other content */
+        }
+
+        /* Loading animation styles */
+        .loading-animation {
+            width: 150px; /* Adjust width as needed */
+            height: 150px; /* Adjust height as needed */
+            /* Replace 'YOUR_GIPHY_LINK_HERE' with your actual GIF link */
+            background-image: url('/static/img/load.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-blend-mode: multiply;
+        }
+
+        #loginForm {
+            display: none;
+        }
+</style>
+<body>
+    <div class="loading-screen">
+        <div class="loading-animation"></div>
+    </div>
+
+    <div class="main">
+
+        <div class="container">
+            <div class="booking-content">
+                <div class="booking-image">
+                    <div class="hero-video">                        
+                        <video width="100%" height="auto" autoplay muted loop class="hero-video">
+                            <source src="{% static 'img/alappey.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="booking-form">
+                    <form id="booking-form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h2>Sign Up</h2>
+                        <div class="form-group form-input">
+                            <input type="text" name="username" id="username" value="" required/>
+                            <label for="username" class="form-label">Your name</label>
+                        </div>
+                        <div class="form-group form-input">
+                            <input type="email" name="email" id="email" value="" required />
+                            <label for="email" class="form-label">Your email</label>
+                        </div>
+                        <div class="form-group form-input">
+                            <input type="password" name="password" id="password" value="" required />
+                            <label for="password" class="form-label">Enter you password</label>
+                        </div>
+
+                        <div class="form-group form-input">
+                            <input type="password" name="confirmPassword" id="confirmPassword" value="" required />
+                            <label for="confirmPassword" class="form-label">Confirm your password</label>
+                        </div>
+                        <div class="form-radio">
+                            <label class="label-radio">Approximate number of travellers with you</label>
+                            <div class="radio-item-list">
+                                <span class="radio-item">
+                                    <input type="radio" name="number" value="0" id="number_people_2" />
+                                    <label for="number_people_2">0</label>
+                                </span>
+                                <span class="radio-item active">
+                                    <input type="radio" name="number" value="2" id="number_people_4" checked="checked" />
+                                    <label for="number_people_4">2</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" name="number" value="4" id="number_people_6" />
+                                    <label for="number_people_6">4</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" name="number" value="6" id="number_people_8" />
+                                    <label for="number_people_8">6</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" name="number" value="6+" id="number_people_10" />
+                                    <label for="number_people_10">6+</label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-submit">
+                            <input type="submit" value="Book now" class="submit" id="submit" name="submit" />
+                            <a href="{% url 'signin' %}" class="vertify-booking">Already a member? Sign In</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/signup.js' %}"></script>
+    <script>
+                const hideLoadingScreen = () => {
+                const loadingScreen = document.querySelector('.loading-screen');
+                const loginForm = document.getElementById('booking-form');
+
+                // Hide loading screen and display login form immediately
+                loadingScreen.style.display = 'none'; // Hide loading screen
+                loginForm.style.display = 'block'; // Show login form
+            };
+
+            // Show loading screen initially
+            document.addEventListener('DOMContentLoaded', () => {
+                const loadingScreen = document.querySelector('.loading-screen');
+                loadingScreen.style.display = 'flex'; // Show loading screen
+
+                // Call function to hide loading screen without delay
+                hideLoadingScreen();
+            });
+    </script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

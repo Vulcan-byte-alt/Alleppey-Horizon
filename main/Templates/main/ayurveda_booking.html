@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic Massage Booking</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative; /* Added for background image */
+            z-index: 2; /* Added for background image */
+            overflow: hidden; /* Added for background image */
+            background-image: url('/static/img/output.jpg'); /* Your background image URL */
+            background-size: cover; /* Added for background image */
+            background-position: center; /* Center the background image */
+            backdrop-filter: blur(5px);
+        }
+
+        header {
+            background-color: #6e4e37;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px; /* Increased padding for more height */
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: slideIn 1s ease-out; /* Slide-in animation */
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px); /* Start from the top */
+            }
+            100% {
+                transform: translateY(0); /* Move to the original position */
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6e4e37;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        #selected-treatment-info,
+        #total-price {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #6e4e37;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ayurvedic Massage Centre</h1>
+    </header>
+
+    <main style="width: 500px;  ">
+        <h2>Booking Form</h2>
+
+        <form id="booking-form" method="post" style="height:490px;" action="{% url 'ayurvedabooking' %}"> <!-- Increased height -->
+            {% csrf_token %}
+
+            <label for="treatment">Select Treatment:</label>
+            <select id="treatment" name="treatment" onchange="updateTreatmentInfo()" required>
+                <option value="" selected disabled>Select Treatment</option>
+                <!-- Treatments will be dynamically added here using JavaScript -->
+            </select>
+            <div id="selected-treatment-info"></div>
+            <br>
+            <br>
+            <label for="booking-date">Select Booking Date:</label>
+            <input type="date" id="booking_date" name="booking_date" required>
+
+            <label for="persons">Number of Persons:</label>
+            <input type="number" id="persons" name="persons" min="1" value="1">
+
+            <button type="button" onclick="validateAndCalculate()">Calculate Total</button>
+            <br>
+            <br>
+            <div id="total_price" style="font-weight:bolder;" name="total_price"></div>
+            <br>
+            <input type="hidden" id="hidden_total_price" name="hidden_total_price">
+            <button type="submit" onclick="proceedToPayment()">Proceed to Payment</button>
+            
+            
+
+        </form>
+
+        <script>
+            var isTotalCalculated = false;
+            // Treatment options and prices
+            var treatments = {
+                'Abhyangam': { time: '75 min', price: 1500 },
+                'Kalari Massage + Medicated Steam Bath': { time: '90 min', price: 1800 },
+                'Abhyangam + Shirodhara': { time: '100 min', price: 2850 },
+                'Elakizhi': { time: '60 min', price: 1800 },
+                'Pizhichil': { time: '90 min', price: 2800 },
+                'Navarakkizhi': { time: '60 min', price: 1950 },
+                'Udwarthanam': { time: '60 min', price: 1500 },
+                'Herbal Body Pack': { time: '150 min', price: 4500 },
+                'Nasyam': { time: '30 min', price: 450 },
+                'Herbal Face Pack': { time: '60 min', price: 900 },
+                'Foot Massage': { time: '30 min', price: 800 },
+                'Head Face, Shoulder + Back Massage': { time: '45 min', price: 1050 }
+            };
+
+            // Function to dynamically populate treatment options
+            function populateTreatmentOptions() {
+                var treatmentSelect = document.getElementById('treatment');
+
+                for (var treatment in treatments) {
+                    var option = document.createElement('option');
+                    option.value = treatment;
+                    option.textContent = treatment;
+                    treatmentSelect.appendChild(option);
+                }
+            }
+
+            // Function to update the selected treatment information
+            function updateTreatmentInfo() {
+                var treatmentSelect = document.getElementById('treatment');
+                var selectedTreatmentInfo = document.getElementById('selected-treatment-info');
+
+                var selectedTreatment = treatmentSelect.value;
+                if (selectedTreatment) {
+                    var treatmentTime = treatments[selectedTreatment].time;
+                    var treatmentPrice = treatments[selectedTreatment].price;
+
+                    selectedTreatmentInfo.textContent = 'Selected Treatment: ' + selectedTreatment + ' (' + treatmentTime + ') - Rs. ' + treatmentPrice.toFixed(2);
+                } else {
+                    selectedTreatmentInfo.textContent = '';
+                }
+            }
+
+            window.onload = function() {
+                populateTreatmentOptions();
+            };
+
+            function validateAndCalculate() {
+                var selectedTreatment = document.getElementById('treatment').value;
+
+                if (!selectedTreatment) {
+                    alert('Please select a treatment.');
+                    return;
+                }
+
+                var bookingDate = document.getElementById('booking_date').value;
+
+                if (!bookingDate) {
+                    alert('Please select a booking date.');
+                    return;
+                }
+
+                // Get the current date
+                var currentDate = new Date();
+
+                // Parse the selected booking date
+                var selectedDate = new Date(bookingDate);
+
+                // Check if the selected date is at least one day from the current date
+                if (selectedDate <= currentDate) {
+                    alert('Please select a date from tomorrow onwards.');
+                    return;
+                }
+
+                calculateTotal();
+            }
+
+            function calculateTotal() {
+                var treatmentSelect = document.getElementById('treatment');
+                var personsInput = document.getElementById('persons');
+                var totalPriceElement = document.getElementById('total_price');
+                var hiddenTotalPriceInput = document.getElementById('hidden_total_price');
+
+                var selectedTreatment = treatmentSelect.value;
+                var treatmentPrice = selectedTreatment ? treatments[selectedTreatment].price : 0;
+                var numberOfPersons = parseInt(personsInput.value);
+
+                var totalPrice = treatmentPrice * numberOfPersons;
+
+                // Update the 'total_price' div directly with the calculated total price
+                totalPriceElement.textContent = 'Total Price: Rs. ' + totalPrice.toFixed(2);
+
+                // Set the 'hidden_total_price' value
+                hiddenTotalPriceInput.value = totalPrice;
+
+                isTotalCalculated = true;
+            }
+
+
+            function proceedToPayment() {
+                
+                 if (!isTotalCalculated) {
+
+                    alert('Please calculate the total before proceeding to payment.');
+                    return;
+                }
+
+                var bookingDate = document.getElementById('booking_date').value;
+
+                if (!bookingDate) {
+                    alert('Please select a booking date.');
+                    return;
+                }
+
+                var paymentUrl = "ayurveda_payment/<int:booking_id>/";
+                window.location.href = paymentUrl;
+
+
+                // Redirect to the payment page or perform further actions
+                // Add your logic here
+                
+            }
+        </script>
+    </main>
+</body>
+</html>

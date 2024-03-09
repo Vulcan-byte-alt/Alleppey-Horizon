@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(45deg, #3498db, #2c3e50, #e74c3c, #1abc9c);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .container {
+      background-color:rgba(255, 255, 255, 0.2);  
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    select, input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #219653;
+    }
+
+    #totalPrice {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    input[type="date"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+
+  </style>
+  <title>Premium Houseboat Booking</title>
+  <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+</head>
+<body>
+  <form method="post" action="{% url 'deluxe' %}">
+    {% csrf_token %}
+    <div class="container">
+      <label for="numRooms">Select Number of Rooms:</label>
+      <select id="numRooms" name="numRooms" required>
+        <option value="1">1 Bedroom</option>
+        <option value="2">2 Bedroom</option>
+        <option value="3">3 Bedroom</option>
+        <option value="4">4 Bedroom</option>
+        <option value="5">5 Bedroom</option>
+      </select>
+
+      <label for="numPersons">Number of Persons:</label>
+      <input type="number" id="numPersons" name="numPersons" placeholder="Enter the number of persons" required>
+
+      <!-- Start Date -->
+      <label for="startDate">Check In:</label>
+      <input type="date" id="startDate" name="startDate" required>
+
+      <!-- End Date -->
+      <label for="endDate">Check Out:</label>
+      <input type="date" id="endDate" name="endDate" required>
+
+      <button type="button" onclick="calculateTotal()">Calculate Total</button>
+
+      <input type="hidden" id="hidden_total_price" name="hidden_total_price" value="">
+      <div id="totalPrice"></div>
+
+      <button type="submit" onclick="proceedToPayment()"  style="margin-top: 20px;">Proceed to Details</button>
+      
+    </div>
+  </form>
+
+  <script>
+    function calculateTotal() {
+        const numRooms = document.getElementById('numRooms').value;
+        const numPersons = document.getElementById('numPersons').value;
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+
+        const startDate = startDateInput.value;
+        const endDate = endDateInput.value;
+
+        // New rates based on the number of rooms
+        const newRates = [8000, 12000, 15000, 19000, 20000, 25000, 30000];
+
+        // Validate the number of persons
+        if (numPersons <= 0) {
+            alert('Please enter a valid number of persons.');
+            return;
+        }
+
+        // Validate start and end dates
+        if (!startDate || !endDate) {
+            alert('Please select both start and end dates.');
+            return;
+        }
+
+        // Parse the dates
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+
+        // Check if end date is after start date
+        if (start >= end) {
+            alert('End date must be after the start date.');
+            return;
+        }
+
+        // Format dates as YYYY-MM-DD
+        const formattedStartDate = startDateInput.valueAsDate.toISOString().split('T')[0];
+        const formattedEndDate = endDateInput.valueAsDate.toISOString().split('T')[0];
+
+        let total = newRates[numRooms - 1]; // New rate for the selected number of rooms
+
+        // Additional charge for extra persons
+        if (numPersons > numRooms * 2) {
+            total += (numPersons - numRooms * 2) * 1500;
+        }
+
+        // Ensure total is not negative
+        total = Math.max(0, total);
+
+        // Set the value of the hidden input field
+        document.getElementById('hidden_total_price').value = total;
+
+        // Update the displayed total price
+        document.getElementById('totalPrice').innerText = `Total Price: Rs. ${total}`;
+
+        // Set the formatted dates back to the input fields
+        startDateInput.value = formattedStartDate;
+        endDateInput.value = formattedEndDate;
+    }
+
+
+
+    function proceedToPayment(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      const total = document.getElementById('totalPrice').innerText;
+
+      // Proceed to payment only if a total is calculated
+      if (total && parseInt(total.split(' ')[3])) {
+        // Set the value of the hidden input field
+        document.getElementById('hidden_total_price').value = total;
+
+        // Submit the form programmatically
+        document.querySelector('form').submit();
+        
+        // Replace the following line with your actual URL for the details page
+        // window.location.href = "{% url 'details' %}";
+        // Add your payment logic here
+      } else {
+        alert('Please calculate the total first.');
+      }
+    }
+
+    // Function to set the minimum value of start date to the next day
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + 1); // Set to next day
+      const formattedDate = currentDate.toISOString().split('T')[0];
+      document.getElementById('startDate').setAttribute('min', formattedDate);
+    });
+</script>
+
+
+
+</body>
+</html>

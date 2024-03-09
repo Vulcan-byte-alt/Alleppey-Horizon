@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            font-size: large;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            color: #fff;
+            background-image: url('/static/img/output.jpg');
+            background-position: center;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+            overflow: auto;
+            overflow-y: scroll;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 40px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input, select {
+            width: calc(100% - 24px);
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background: linear-gradient(to bottom, #fafafa, #eee);
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: transparent;
+            box-shadow: 0 0 30px #ff0000;
+            outline: none;
+        }
+
+        label {
+            position: relative;
+            color: #fff;
+            transition: color 0.3s ease;
+            font-weight: 555;
+        }
+
+        label.active {
+            color: #df8f1d;
+        }
+
+        button {
+            width: calc(100% - 24px);
+            background: linear-gradient(to bottom, #6e4e37, #4b3624);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #4b3624, #6e4e37);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form  method="post" id="paymentForm" action="{% url 'process_ayurveda_payment' booking_id=booking.id %}">
+        {% csrf_token %}
+        <label for="card-type" class="label">Card Type:</label>
+        <br>
+        <select id="card-type" name="card-type" required>
+            <option value="credit">Credit Card</option>
+            <option value="debit">Debit Card</option>
+        </select>
+
+        <label for="card-number" class="label">Card Number:</label>
+        <br>
+        <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+
+        <label for="expiry-date" class="label">Expiry Date (MM/YY):</label>
+        <br>
+        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+
+        <label for="cvv" class="label">CVV (3 digits):</label>
+        <br>
+        <input type="text" id="cvv" name="cvv" placeholder="123" required>
+
+        <label for="cardholder-name" class="label">Cardholder Name:</label>
+        <br>
+        <input type="text" id="cardholder-name" name="cardholder-name" placeholder="JOHN DOE" required>
+        <br>
+        <button type="submit">Submit Payment</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('paymentForm');
+        const labels = form.querySelectorAll('.label');
+
+        form.addEventListener('focusin', (event) => {
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT') {
+                labels.forEach((label) => {
+                    label.classList.remove('active');
+                });
+
+                const label = form.querySelector(`label[for=${event.target.id}]`);
+                if (label) {
+                    label.classList.add('active');
+                }
+            }
+        });
+
+        form.addEventListener('focusout', () => {
+            labels.forEach((label) => {
+                label.classList.remove('active');
+            });
+        });
+
+        // Format CVV, Expiry Date, and Card Number
+        const cvvInput = document.getElementById('cvv');
+        cvvInput.addEventListener('input', formatCVV);
+
+        const expiryDateInput = document.getElementById('expiry-date');
+        expiryDateInput.addEventListener('input', formatExpiryDate);
+
+        const cardNumberInput = document.getElementById('card-number');
+        cardNumberInput.addEventListener('input', formatCardNumber);
+
+        // Automatically convert cardholder name to uppercase and allow only non-numeric characters
+        const cardholderNameInput = document.getElementById('cardholder-name');
+        cardholderNameInput.addEventListener('input', formatCardholderName);
+
+        function formatCVV() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 3);
+        }
+
+        function formatExpiryDate() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 4).replace(/^(\d{2})(\d{1,2})$/, '$1/$2');
+        }
+
+        function formatCardNumber() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4');
+        }
+
+        function formatCardholderName() {
+            this.value = this.value.replace(/\d/g, ''); // Remove numeric characters
+            this.value = this.value.toUpperCase();
+        }
+    </script>
+
+</body>
+</html>

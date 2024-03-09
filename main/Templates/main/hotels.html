@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotels & Resorts</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        
+
+        .main-heading {
+            font-family: "Raleway";
+            font-size: 50px;
+            background: linear-gradient(45deg, #980bcb, #048f0db9);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .hotel-heading,
+        .resort-heading,
+        .stay-heading {
+            font-family: "Raleway";
+            font-size: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, #3399FF, #FF3399);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        .hotel {
+            background-color: rgba(0, 0, 0, 0.43);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            margin:7px;
+        }
+
+        .hotel:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(172, 8, 201, 0.414);
+            border-color: #4CAF50;
+            
+        }
+
+        .hotel img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .hotel h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #ffffff8e;
+        }
+
+        .hotel p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .hotel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .button {
+            display: inline-block;
+            font-size: 20px;
+            color: #fff;
+            background: linear-gradient(45deg, #980bcb, #048f0db9);
+            padding: 10px 24px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    <div class="live-background"></div>
+
+    <h1 class="main-heading">Hotels & Resorts </h1>
+    <div class="container">
+
+        <div class="hotel">
+            <h2 class="stay-heading">Lake Palace</h2>
+            <img src="/static/img/51331_17091815330056518016.jpg" alt="Image of Stay Name 3">
+            <p> Lake Palace Alappuzha is a 5-star resort that offers you free Wi-Fi, cozy beds, and deluxe amenities for a comfortable stay. You can also enjoy a free breakfast, a fitness center, a swimming pool, and a spa. The resort has a private lagoon surrounded by backwaters, and overlooks the Vembanad Lake – the longest freshwater lake in India. You can also savor the exotic flavors of the coast and delectable global cuisines at the resort’s restaurant.</p>
+            <center><a href="{% url 'palace' %}" class="button">Book Now</a></center>
+        </div>
+        
+
+        <div class="hotel">
+            <h2 class="hotel-heading">Ramada by Wyndham Alleppey</h2>
+            <img src="/static/img/ramada-main3.jpg" alt="Image of Ramada by Wyndham Alleppey">
+            <p>This is a 5-star hotel that will exceed your expectations with its elegant design, exceptional service, and luxurious features. You can enjoy free Wi-Fi throughout the hotel, as well as cozy beds with premium bedding and pillows, and deluxe amenities such as bathrobes, slippers, and toiletries. Start your day with a delicious free breakfast, featuring a variety of dishes from local and international cuisines. You can also work out at the state-of-the-art fitness center, or relax at the stunning swimming pool, surrounded by lush gardens and sun loungers. For a complete pampering experience, you can visit the hotel’s spa, where you can indulge in a range of treatments, such as massages, facials, and aromatherapy. Whether you are traveling for business or leisure, this 5-star hotel will make your stay unforgettable.</p>
+            <center><a href="{% url 'ramada' %}" class="button">Book Now</a></center>
+        </div>
+        
+
+        <div class="hotel">
+            <h2 class="resort-heading">Abad Turtle Beach</h2>
+            <img src="/static/img/256271007.jpg" alt="Image of Abad Turtle Beach">
+            <p>Abad Turtle Beach is a seaside resort in Mararikulam, Alleppey, that overlooks the white sandy beach and a rivulet. The resort has 30 premium cottages and villas, with free Wi-Fi, cozy beds, and deluxe amenities. You can also enjoy a free breakfast, a swimming pool, a spa, and an organic garden.In addition, the resort offers a variety of recreational activities such as yoga, cycling, and village walks, making it an ideal destination for relaxation and adventure.</p>
+            <center><a href="{% url 'abad_resort' %}" class="button">Book Now</a></center>
+        </div>
+
+        <div class="hotel">
+            <h2 class="stay-heading">Raheem Residency</h2>
+            <img src="/static/img/raheem.jpeg" alt="Image of Hotel Arcadia Regency">
+            <p>Raheem Residency is a heritage hotel at Alleppey Beach, dating back to 1868. It has 10 rooms with free Wi-Fi, cozy beds, and antique furniture. You can also enjoy a free breakfast, a swimming pool, a spa, and a yoga center.Additionally, you can savor the delicious cuisine at the hotel’s restaurant, which offers a sea view and a variety of dishes from local and international cuisines</p>
+            <center><a href="{% url 'raheem' %}" class="button">Book Now</a></center>
+        </div>
+
+        <div class="hotel">
+            <h2 class="hotel-heading">Classic Regency</h2>
+            <img src="/static/img/174e8adcb8db11ed9e180a58a9feac02.avif" alt="Image of Hotel Arcadia Regency">
+            <p>Classic Regency is a 4-star hotel in Alappuzha, also known as the Venice of the East, that offers you a splendid view of the beach and the city’s cultural heritage. The hotel has 30 well-appointed rooms, with free Wi-Fi, cozy beds, and deluxe amenities. You can also enjoy a free breakfast, a fitness center, a swimming pool, a spa, and an organic garden. The hotel’s restaurant serves a variety of mouth-watering cuisine, from Chinese, Indian, and local dishes. You can also relax at the coffee shop, or avail the travel desk services for flight reservations, cab for sightseeing, houseboat booking, and more. Classic Regency is a safe haven dedicated to your well-being and comfort, where you can experience the best of Kerala on a silver platter.</p>
+            <center><a href="{% url 'regency' %}" class="button">Book Now</a></center>
+        </div>
+
+        <div class="hotel">
+            <h2 class="hotel-heading">Marari Village Beach Resort by EGH</h2>
+            <img src="/static/img/Screenshot 2024-02-13 234822.png" alt="Image of Hotel Name 3">
+            <p>Marari Village Beach Resort by EGH, located in Alleppey, is a perfect getaway destination. It offers an expansive pool, a plush spa, a private beach area, and an on-site restaurant. The resort provides a wide range of indoor and outdoor entertainment options, including carrom and tennis. It’s strategically close to the beautiful Marari Beach</p>
+            <center><a href="{% url 'marari' %}" class="button">Book Now</a></center>
+        </div>
+
+        <div class="hotel">
+            <h2 class="resort-heading">Zostel Aleppey</h2>
+            <img src="/static/img/zostel-alleppey-20221008133041-transformed.jpeg" alt="Image of Resort Name 3">
+            <p>Zostel Alleppey is a 1-star resort that is a backpacker’s paradise. It is situated right at the scenic Alappuzha Beach, and is ideal for exploring the town and its backwaters. It has 12 rooms, with free Wi-Fi, cozy beds, and lockers. You can also enjoy a free breakfast, a common area, and a rooftop terrace. Moreover, you can join the hostel’s activities, such as boat tours, village walks, and cultural events, and meet other travellers from around the world. Zostel Alleppey is a lively and budget-friendly option that offers you a fun and memorable stay on the shores of the Arabian Sea.</p>
+            <center><a href="{% url 'zostel' %}" class="button">Book Now</a></center>
+        </div>
+
+        <div class="hotel">
+            <h2 class="stay-heading">Brooklands Avenue</h2>
+            <img src="/static/img/332101564-transformed.jpeg" alt="Image of Stay Name 3">
+            <p> Brooklands Avenue is a 1-star hotel that is located near the scenic Alappuzha Beach, and is ideal for exploring the town and its backwaters. The hotel has 30 rooms, with free Wi-Fi, cozy beds, and basic amenities. You can also enjoy a free breakfast, a garden, a shared lounge, and a terrace. The hotel provides room service and a 24-hour front desk, along with free private parking for guests who drive. The hotel also has a restaurant that serves a variety of mouth-watering cuisine, from Chinese, Indian, and local dishes. You can also avail the travel desk services for flight reservations, cab for sightseeing, houseboat booking, and more. Additionally, you can relax at the hotel’s rooftop, where you can enjoy the panoramic view of the beach and the sunset. Brooklands Avenue is a budget-friendly option that offers you a comfortable and convenient stay on the shores of the Arabian Sea.</p>
+            <center><a href="{% url 'brooklands' %}" class="button">Book Now</a></center>
+        </div>
+
+        <div class="hotel">
+            <h2 class="resort-heading">Alleppey Beach Resorts</h2>
+            <img src="/static/img/7ada504ccce011eb98b50242ac110003.avif" alt="Image of Alleppey Beach Resorts">
+            <p> Enjoy the scenic views, the backwaters, and the culture of Alleppey at the beach resorts. They offer free Wi-Fi, cozy beds, deluxe amenities, free breakfast, fitness center, swimming pool, spa, and more. Find a beach resort that suits your budget and style.You can indulge in the local cuisine at the in-house restaurants, or unwind with a book in the tranquil surroundings. With its prime location and excellent amenities, Alleppey Beach Resorts offers a unique and enjoyable stay for its guests. So, whether you’re looking for a peaceful retreat or an adventurous holiday, we have something for everyone.</p>
+            <center><a href="{% url 'beach_resort' %}" class="button">Book Now</a></center>
+        </div>
+        
+    </div>
+    <script>
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var particlesArray = [];
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 5 + 1;
+            this.speedX = Math.random() * 3 - 1.5;
+            this.speedY = Math.random() * 3 - 1.5;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.size > 0.2) this.size -= 0.1;
+        }
+
+        Particle.prototype.draw = function() {
+            ctx.fillStyle = '#3399FF';
+            ctx.strokeStyle = '#FF3399';
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.closePath();
+
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function createParticles() {
+            particlesArray = [];
+
+            for (var i = 0; i < 100; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (var i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+
+                if (particlesArray[i].size <= 0.2) {
+                    particlesArray.splice(i, 1);
+                    i--;
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+
+            if (particlesArray.length < 100) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        createParticles();
+        animateParticles();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var hotels = document.querySelectorAll('.hotel');
+
+            for (var i = 0; i < hotels.length; i++) {
+                hotels[i].style.transform = 'translateX(-100%)';
+                hotels[i].style.opacity = '0';
+            }
+
+            setTimeout(function () {
+                for (var i = 0; i < hotels.length; i++) {
+                    hotels[i].style.transform = 'translateX(0)';
+                    hotels[i].style.opacity = '1';
+                    hotels[i].style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out';
+                }
+            }, 100);
+
+            for (var i = 0; i < hotels.length; i++) {
+                hotels[i].addEventListener('mouseover', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.boxShadow = '0 8px 16px rgba(255,51,153,0.6)';
+                    this.style.borderColor = '#4CAF50';
+                });
+
+                hotels[i].addEventListener('mouseout', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+                    this.style.borderColor = 'transparent';
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

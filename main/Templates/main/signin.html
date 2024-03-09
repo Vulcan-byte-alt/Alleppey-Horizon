@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn Form</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+    <!-- Font and Font Awesome CDN links -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+
+    <style media="screen">
+        /* Reset and base styles */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('/static/img/signin1.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: contain;
+        }
+
+        .container {
+            max-width: 800px; /* Set the maximum width for your content */
+            margin: 0 auto; /* Center the container horizontally */
+            padding: 20px; /* Add some padding for better aesthetics, adjust as needed */
+        }
+
+        /* Form styles */
+        .background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 430px;
+            height: 520px;
+        }
+
+        form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 640px;
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+            backdrop-filter: blur(3px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.5s ease-in-out; /* Transition for background color change */
+        }
+
+        h1 {
+            height: 35px;
+            font-size: 42px;
+            font-weight: 500;
+            margin-bottom: 10px; /* Increase spacing from inputs */
+            font-family: 'Great Vibes', cursive;
+        }
+
+        
+        label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: color 0.3s ease-in-out;
+            color:#010507;
+        }
+
+
+        input {
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.6); /* Adjust the transparency here */
+            border-radius: 25px; /* Make input fields more rounded */
+            padding: 0 15px; /* Increase horizontal padding for input fields */
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+            border: none; /* Remove border */
+            outline: none; /* Remove outline */
+        }
+
+        input:focus {
+        box-shadow: 0 0 10px rgba(248, 2, 166, 0.986); /* Adjust the glow effect */
+        }
+       
+        button[type="submit"],
+        .social div {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            outline: none;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        button[type="submit"]:hover,
+        .social div:hover {
+            background-color: #080710;
+            color: #ffffff; /* Change text color on hover */
+        }
+
+        .social {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .social div {
+            width: calc(50% - 10px);
+        }
+
+        .google i {
+            color: #db4437; /* Google's color */
+        }
+
+        .facebook i {
+            color: #3b5998; /* Facebook's color */
+        }
+
+        /* Other styles */
+        .footer-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer-links a {
+            font-size: large;
+            margin: 0 5px;
+            color: #fff;
+            text-decoration: none;  
+        } 
+
+        .footer-links:hover a {
+            color:red
+        }
+
+        .footer-lnks {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer-lnks a {
+            font-size: large;
+            margin: 0 5px;
+            color: #fff;
+            text-decoration: none;
+        } 
+
+        .footer-lnks:hover a {
+            color:darkmagenta
+
+        } 
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000; /* Change background color as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensure it's above other content */
+        }
+
+        /* Loading animation styles */
+        .loading-animation {
+            width: 150px; /* Adjust width as needed */
+            height: 150px; /* Adjust height as needed */
+            /* Replace 'YOUR_GIPHY_LINK_HERE' with your actual GIF link */
+            background-image: url('/static/img/load.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-blend-mode: multiply;
+        }
+
+        #loginForm {
+            display: none;
+        }
+
+        .social a {
+            text-decoration: none;
+        }
+
+    </style>
+    <script>
+    const adjustBackgroundSize = () => {
+        const body = document.body;
+        const backgroundImage = getComputedStyle(body).backgroundImage;
+
+        // Check if backgroundImage is not null and matches a URL pattern
+        const imageUrlMatch = backgroundImage && backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+
+        if (imageUrlMatch && imageUrlMatch[1]) {
+            const imageUrl = imageUrlMatch[1];
+
+            const tempImage = new Image();
+
+            tempImage.onload = function () {
+                // Function to set the background size and position based on window dimensions
+                const setBgSizeAndPosition = () => {
+                    const windowWidth = window.innerWidth;
+                    const windowHeight = window.innerHeight;
+
+                    // Calculate the aspect ratio of the original image
+                    const aspectRatio = tempImage.width / tempImage.height;
+
+                    // Adjust the zoom factor to your preference (e.g., 0.8 means zoom out by 20%)
+                    const zoomFactor = 1;
+
+                    // Calculate the width and height for the background image with zoom
+                    const bgWidth = windowWidth * zoomFactor;
+                    const bgHeight = bgWidth / aspectRatio;
+
+                    // Set the background size
+                    body.style.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+
+                    // Set the background position to center both horizontally and vertically
+                    body.style.backgroundPosition = 'center center';
+                };
+
+                // Call the setBgSizeAndPosition function initially and on window resize
+                setBgSizeAndPosition();
+                window.addEventListener('resize', setBgSizeAndPosition);
+            };
+
+            // Set the src property to initiate loading
+            tempImage.src = imageUrl;
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', adjustBackgroundSize);
+</script>
+
+
+
+
+
+
+
+</head>
+<body>
+
+    <div class="loading-screen">
+        <div class="loading-animation"></div>
+    </div>
+    
+    <div class="background">
+        <form id="loginForm" name="loginForm" method="post" action="{% url 'signin' %}" style="display: block;height: 653.2px;">
+            {% csrf_token %}
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sign In</h1>
+            <br>
+            <br>
+            <label for="Email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="current-email" required>
+            <br>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+            <br>
+            <br>
+            <button type="submit">Sign in</button>
+            <br>
+            
+            <div class="social">
+                {% load socialaccount %}
+
+                <div class="google" id="googleButton">
+                    <i class="fab fa-google"></i> Google
+                </div>
+
+                <div class="facebook" id="facebookButton">
+                    <i class="fab fa-facebook"></i> Facebook
+                </div>
+
+                <script>
+                    var googleButton = document.getElementById('googleButton');
+                    var facebookButton = document.getElementById('facebookButton');
+
+                    if (googleButton) {
+                        googleButton.onclick = function() { 
+                            window.location.href = "{% provider_login_url 'google' %}?next=/";
+                        };
+                    }
+
+                    if (facebookButton) {
+                        facebookButton.onclick = function() {
+                            window.location.href = "{% provider_login_url 'facebook' %}?next=/";
+                        };
+                    }
+                </script>
+            </div>
+
+
+            <br>
+            <div class="footer-links">
+                <a href="{% url 'reset_password' %}">Forgot Password?</a>
+            </div> 
+            <div class="footer-lnks">
+                <a href="{% url 'signup' %}">Don't have an account? Sign Up</a>
+            </div>
+            <br>
+            <br>
+        </form>
+        
+    </div>
+
+    <script>
+        /*const form = document.getElementById('loginForm');
+        const inputs = document.querySelectorAll('input');
+        const colors = [
+            'rgba(255, 99, 71, 0.5)', // Tomato with transparency
+            'rgba(70, 130, 180, 0.5)', // Steel Blue with transparency
+            'rgba(60, 179, 113, 0.5)', // Medium Sea Green with transparency
+            'rgba(186, 85, 211, 0.5)' // Medium Orchid with transparency
+        ]; // Array of colors to rotate
+        let currentColor = 0;
+
+        setInterval(() => {
+            const color = colors[currentColor];
+            form.style.backgroundColor = colors[currentColor];
+            currentColor = (currentColor + 1) % colors.length;
+        }, 3000); // Change color every 3 seconds*/
+        
+        // Function to hide the loading screen and display the login form after a delay
+        const hideLoadingScreenWithDelay = () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const loginForm = document.getElementById('loginForm');
+
+            // Hide loading screen and display login form after a delay of 2000 milliseconds (2 seconds)
+            setTimeout(() => {
+                loadingScreen.style.display = 'none'; // Hide loading screen
+                loginForm.style.display = 'block'; // Show login form
+            }, 0); // Delay in milliseconds
+        };
+
+        // Show loading screen initially
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            loadingScreen.style.display = 'flex'; // Show loading screen
+
+            // Call function to hide loading screen after a delay
+            hideLoadingScreenWithDelay();
+        });
+    </script>
+</body>
+</html>

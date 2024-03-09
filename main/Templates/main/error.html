@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Error</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .error-container {
+            padding: 40px;
+            border-radius: 8px;
+            background-color: #ffcccc; /* Light red background color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            animation: pulsate 1.5s ease-in-out infinite; /* Animation for pulsating effect */
+        }
+        @keyframes pulsate {
+            0% {
+                transform: scale(1); /* Initial size */
+            }
+            50% {
+                transform: scale(1.1); /* Slightly larger size */
+            }
+            100% {
+                transform: scale(1); /* Return to initial size */
+            }
+        }
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        p {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        a {
+            color: #1a93ef;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #1a93ef;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Login Error</h1>
+        <p>Sorry, your login attempt failed. Please <a href="{% url 'signin' %}">try again</a>.</p>
+    </div>
+</body>
+</html>

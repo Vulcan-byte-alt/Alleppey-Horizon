@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* Use min-height instead of height */
+      background: linear-gradient(45deg, #3498db, #2c3e50, #e74c3c, #1abc9c);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s infinite;
+      text-align: center;
+      color: #fff;
+      overflow-y: scroll; /* Add this line to enable vertical scrollbar */
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: slideIn 1s ease;
+      width: 75%; /* Adjust the width as needed */
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    h1, h2, h3, p {
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2, h3 {
+      border-bottom: 2px solid #b75575;
+      padding-bottom: 5px;
+      margin-top: 20px;
+    }
+
+    p {
+      margin-top: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    button.proceed-btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+  }
+
+  button.proceed-btn:hover {
+    background-color: #2980b9;
+  }
+
+  #acknowledge-checkbox {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+  }
+
+  #acknowledge-checkbox input {
+    margin-right: 10px;
+  }
+
+   button.contact-btn {
+      background-color: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    button.contact-btn:hover {
+      background-color: #c0392b;
+    }
+
+  </style>
+
+  <title>Houseboat Mart - Alleppey Cruising Itinerary</title>
+  <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+
+</head>
+
+<body>
+
+
+  <div class="container">
+
+    <h2>Day Cruise Rates</h2>
+    <table>
+      <tr>
+        <th>No Persons</th>
+        <th>No of Rooms</th>
+        <th>Rate</th>
+        <th>Extra Person</th>
+      </tr>
+      <tr>
+        <td>2 pax</td>
+        <td>1</td>
+        <td>Rs. 7,500</td>
+        <td>Rs. 1000/head</td>
+      </tr>
+      <tr>
+        <td>4 pax</td>
+        <td>1</td>
+        <td>Rs. 9,500</td>
+        <td>Rs. 1000/head</td>
+      </tr>
+      <tr>
+        <td>10 pax</td>
+        <td>1</td>
+        <td>Rs. 15,000</td>
+        <td>Rs. 1000/head</td>
+      </tr>
+      <tr>
+        <td>30 pax</td>
+        <td>2</td>
+        <td>Rs. 35,000</td>
+        <td>Rs. 1000/head</td>
+      </tr>
+      <tr>
+        <td>50 pax</td>
+        <td>3</td>
+        <td>Rs. 45,000</td>
+        <td>Rs. 1000/head</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="container">
+    <h2>Houseboat Day Cruise at Alleppey– Non AC (5Hrs)</h2>
+    <p>
+      Check-in - 12noon
+      <br>
+      <br>
+      Checkout - 5pm
+      <br>
+      <br>
+      Including - Welcome drink, Lunch, Evening Tea & Snacks
+      <br>
+      <br>
+      For AC charge will be extra
+    </p>
+  </div>
+
+  <div class="container">
+    <h2>How to Reach Alleppey Check-in Point?</h2>
+    <ul>
+      <li>Important Check-in points in and around Alleppey:
+        <ul>
+          <li>Alleppey Finishing Point (Major check-in point) - is located at the heart of the town of Alleppey.</li>
+          <li>Punnamada, Mullakkal, Thathampally, Nedumudy are some other popular check-in points.</li>
+        </ul>
+      </li>
+
+      <li><strong>Nearest Airports:</strong>
+        <ul>
+          <li>Cochin Airport to Alleppey - 100 Km</li>
+          <li>Trivandrum Airport to Alleppey - 160 Km</li>
+        </ul>
+      </li>
+
+      <li><strong>Nearest Railway Stations:</strong>
+        <ul>
+          <li>Alleppey Railway Station to Alleppey Finishing Point - 2 Km</li>
+          <li>Ernakulam (Town/Junction) railway station to Alleppey - 65 Km</li>
+        </ul>
+      </li>
+
+      <li><strong>Nearest Bus Stand:</strong>
+        <ul>
+          <li>Alleppey KSRTC Bus stand to Alleppey Finishing Point - 2 Km</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <h2>Additional Information</h2>
+    <ul>
+      <li>Rent rates are subject to India Government Taxes & Levies.</li>
+      <li>The above package cost is Inclusive of (fixed menu) Breakfast, Lunch, Dinner, Tea/Coffee, and Snacks & Mineral water during meals.</li>
+      <li>Check In time is 12.00 PM & Check Out time is 09.00 AM.</li>
+      <li>Houseboats are anchored (cruise stop) from 6 PM (Evening) till 7 AM (Morning) & parked on the lake shore for night stay.</li>
+      <li>Children below 5 years of age are complimentary.</li>
+      <li>Special dishes can be arranged subject to availability against direct payment.</li>
+      <li>Deposit of 50% of total cost required upon booking confirmation. Pay the balance amount while checking-in.</li>
+      <li>All rooms & washrooms will be thoroughly disinfected before each check-in, with special emphasis on high-frequency touch points.</li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <button class="contact-btn" onclick="contactUs()">Still in Doubt? Contact Us</button>
+  </div>
+
+
+  <style>
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+
+  <script>
+    function contactUs() {
+      // Add your contact us logic here, for example, redirecting to a contact page or displaying a contact form.
+      alert('If you have any doubts, please feel free to contact us!');
+      window.location.href = "{% url 'user' %}#Contact";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic Massages - Description Type</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #f4ecd8, #e4d5ba);
+            background-size: 400% 400%;
+            animation: colorChange 10s infinite alternate;
+            background-image: url('/static/img/output.jpg');
+            background-position: center;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+
+        @keyframes colorChange {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        header {
+            background-color: #7d5a41ba; /* Dark brown header */
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            width: 100%; /* Full width for better alignment */
+        }
+
+        main {
+            position: relative;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 2;
+            opacity: 0.9; /* Adjust opacity for transparency */
+            animation: slideIn 1s ease-out; /* Adjust duration and timing function as needed */
+            opacity: 0; /* Start with opacity set to 0 */
+        }
+
+         @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%); /* Start from left */
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0); /* Move to original position */
+            }
+        }
+
+        h1 {
+            color: #653614;
+        }
+
+        h2 {
+            color: #6e4e37; /* Dark brown text color */
+        }
+
+        p {
+            line-height: 1.6;
+            color: #333; /* Dark gray text color */
+        }
+
+        .massage-type {
+            margin-bottom: 20px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .book-now-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6e4e37; /* Dark brown color */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .book-now-btn:hover {
+            background-color: #4a3525; /* Darker brown color on hover */
+        }
+
+        .scroll-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ayurvedic Massage Centre</h1>
+    </header>
+
+    <main>
+        <h2>Discover the Essence of Ayurvedic Massages</h2>
+
+        <p>Welcome to our Ayurvedic Massage Centre, where ancient traditions meet modern wellness. Immerse yourself in a rejuvenating experience that balances your mind, body, and spirit.</p>
+
+        <h2>Ayurvedic Massages</h2>
+
+
+        <div class="massage-type">
+            <h3>Abhyangam</h3>
+            <p>Abhyangam, a comprehensive full-body massage using herbal oils, not only revitalizes and strengthens all tissues but also promotes optimal health and longevity. This traditional practice enhances vitality (Ojas), boosts immunity, and contributes to radiant skin. With additional benefits for the eyes and promoting restful sleep, Abhyangam serves as a remedy for rheumatism. This invigorating massage helps maintain body fitness, regulates fat, combats skin aging, alleviates stress, and improves circulation when performed with medicated oils..</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Kalari Massage with Medicated Steam Bath   </h3>
+            <p>This 60-minute massage, followed by a 30-minute steam bath, combines the benefits of a full-body massage with the therapeutic effects of herbal steam. After the massage using warm oils, steam infused with precious herbs promotes perspiration, eliminating impurities, enhancing body tone, and improving circulation. This treatment is effective for skin issues, weight management, joint pain, respiratory problems, and rheumatic complaints.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Pizzichil</h3>
+            <p>Pizhichil, a specialized Ayurvedic therapy, involves pouring warm medicated oil over the body in a continuous stream using a cloth. Administered by four therapists, this treatment addresses skeletal and muscular issues such as arthritis, lumbago, sciatica, and neurological conditions. The patient undergoes the therapy while sitting and lying down, with a cloth tied over the forehead to protect the eyes. Note that Ayurvedic treatments are personalized, and certain therapies may be excluded based on individual needs and doctor's recommendations.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Shirodhara</h3>
+            <p>In this therapeutic process, the patient reclines on a specialized wooden bed (droni) as medicated oil, milk, or buttermilk is gently poured in a continuous stream over the head by the therapist, assisted by two others. Using an earthen vessel with a hole, the liquid is released in a controlled manner, allowing it to flow along a thread onto the forehead. The collected liquid is then recirculated. Following the session, the patient undergoes a warm water bath or is toweled off. This treatment, tailored to the individual's needs, aims to alleviate fatigue, enhance memory, restore balance, and is beneficial for conditions like insomnia, migraine, ear and nose diseases, spondylitis, and paraplegia.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Swedana</h3>
+            <p>This herbal steam treatment promotes perspiration, aiding in the release of impurities from the skin. It is particularly beneficial for soothing painful, sore, or aching muscles and joints while enhancing the complexion.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Nasya</h3>
+            <p>Ayurvedic therapy designed to address excess mucus and blocked sinuses involves an invigorating head massage followed by herbal steam inhalation and the application of hot towels. The treatment concludes with the administration of herbal nasal drops, facilitating the loosening, melting, and release of mucus from the sinus passages.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Netra Tarpana</h3>
+            <p>This soothing treatment involves bathing the eyes in a cooling liquid to alleviate soreness and tiredness. Additionally, it gently aids in removing toxins and impurities from the eyes..</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Ksheeradhara</h3>
+            <p>This treatment involves the continuous pouring of warm medicated milk over the entire body for a duration of 45 to 60 minutes.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Njavarakizhi</h3>
+            <p>This treatment entails a massage using linen bags filled with cooked Njavara rice, soaked continuously in a blend of milk and decoction for a period of 45 to 60 minutes..</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Sirovasthi</h3>
+            <p>During this treatment, a feather cap containing lukewarm oil is applied to the scalp and left in place for 45 to 60 minutes.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Tailadhara</h3>
+            <p>During this treatment, medicated lukewarm oil is poured over the forehead and scalp continuously for a duration of 45 to 60 minutes.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Udhwartanam</h3>
+            <p>This treatment involves a full-body massage using fine medicinal powder for 45-60 minutes, aiming to invigorate and energize the body. It supports improved digestion, healthier skin, firmer muscle tone, increased circulation, and the breakdown of cellulite. Particularly recommended for individuals dealing with obesity or seeking weight loss.</p>
+        </div>
+
+        <div class="massage-type">
+            <h3>Vasti</h3>
+            <p>This involves the application of an enema using decoctions and medicated oil.</p>
+        </div>
+
+        <h2>Book Now</h2>
+        <p>Indulge in the ancient wisdom of Ayurveda. Book your session now and experience the holistic benefits of our rejuvenating massages.</p>
+         <center><a href="{% url 'ayurvedabooking' %}" class="book-now-btn">Book Now</a></center>
+
+        
+        <script>
+            window.onload = function () {
+                showBookingForm();
+            };
+
+            function showBookingForm() {
+                var mainContent = document.querySelector('main');
+
+                // Remove the opacity property to trigger the animation
+                mainContent.style.opacity = '1';
+            }
+        </script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .bg-houseboat {
+    background-image: url('https://source.unsplash.com/1200x800/?houseboat');
+    background-blend-mode: multiply;
+    background-size: cover;
+  }
+  
+  .login-container {
+    perspective: 1500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .login-form {
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+    transform: rotateY(8deg) rotateX(8deg);
+  }
+  
+  .login-form:hover {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+  
+  .input-field {
+    width: calc(100% - 12px);
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+
+  
+.input-field {
+    width: calc(100% - 12px);
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #6ee7b7;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    background-color: #6ee7b7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #48bb78;
+  }

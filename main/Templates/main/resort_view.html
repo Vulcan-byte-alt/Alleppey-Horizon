@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resort Bookings</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+    
+    <!-- CSS Styles -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-size: 400% 400%;
+            background-color: black;
+            animation: gradientAnimation 10s infinite;
+        }
+
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 600px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(0); /* Move to the original position */
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        select, input, input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #980bcb, #048f0db9);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #219653;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 13%);
+            border: 2px solid #a800af; /* Added border style and color */
+            border-radius: 5px;
+        }
+
+
+        #totalPrice {
+            margin-top: 30px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #219653;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: none;
+        }
+
+        h2 {
+            color: #a416aa;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #27ae60;
+        }
+
+        #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="particles"></canvas>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scrollToTopBtn" onclick="scrollToTop()">Scroll to Top</button>
+
+    <!-- Booking Information Container -->
+    <div class="container">
+        <h2>Your Resort Bookings</h2>
+
+        <!-- Display Bookings or Booking Prompt -->
+        {% if user_resort_bookings %}
+            <ul>
+                {% for booking in user_resort_bookings %}
+                    <li>
+                        <label>{{ forloop.counter }}.</label><br>
+                        <label>Hotel:</label> {{ booking.Resort }}<br><br>
+                        <label>Number of Rooms:</label> {{ booking.rooms }}<br><br>
+                        <label>Check-In Date:</label> {{ booking.CheckIn }}<br><br>
+                        <label>Price:</label>₹{{ booking.price }}<br><br>
+                        <label>Payment Completed:</label> {% if booking.payment_completed %}Yes{% else %}No{% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No resort bookings yet. Book your resort now!</p>
+        {% endif %}
+
+        <!-- Booking Button -->
+        {% url 'hotels' as hotel_booking_url %}
+        <button onclick="window.location.href='{{ hotel_booking_url }}'">Book Your Resort</button>
+    </div>
+
+
+    <!-- Add other content as needed -->
+
+    <!-- JavaScript for Scroll-to-Top Button -->
+    <script>
+        // Show/hide scroll-to-top button based on scroll position
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById('scrollToTopBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollToTopBtn').style.display = 'none';
+            }
+        };
+
+        // Scroll to the top when the button is clicked
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var canvas = document.getElementById('particles');
+            var ctx;
+
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                var particlesArray = [];
+
+                function Particle() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 5 + 1;
+                    this.speedX = Math.random() * 3 - 1.5;
+                    this.speedY = Math.random() * 3 - 1.5;
+                }
+
+                Particle.prototype.update = function() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.size > 0.2) this.size -= 0.1;
+                }
+
+                Particle.prototype.draw = function() {
+                    ctx.fillStyle = '#3399FF';
+                    ctx.strokeStyle = '#FF3399';
+                    ctx.lineWidth = 2;
+
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.closePath();
+
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                function createParticles() {
+                    particlesArray = [];
+
+                    for (var i = 0; i < 100; i++) {
+                        particlesArray.push(new Particle());
+                    }
+                }
+
+                function animateParticles() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    for (var i = 0; i < particlesArray.length; i++) {
+                        particlesArray[i].update();
+                        particlesArray[i].draw();
+
+                        if (particlesArray[i].size <= 0.2) {
+                            particlesArray.splice(i, 1);
+                            i--;
+                        }
+                    }
+
+                    requestAnimationFrame(animateParticles);
+
+                    if (particlesArray.length < 100) {
+                        particlesArray.push(new Particle());
+                    }
+                }
+
+                window.addEventListener('resize', function() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    createParticles();
+                });
+
+                createParticles();
+                animateParticles();
+            }
+        });
+    </script>
+</body>
+</html>

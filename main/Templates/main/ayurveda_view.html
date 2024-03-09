@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Ayurveda Bookings</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
+            overflow: auto;
+            background-image: url('/static/img/output.jpg');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(5px);
+        }
+
+        header {
+            background-color: #6e4e37;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        li {
+            margin-bottom: 15px;
+            font-size: 16px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2); /* Slight darker white color */
+            border-radius: 8px;
+            border: 2px solid #6e4e37;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 14px 20px;
+            background-color: #6e4e37;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 20px; /* Increased margin */
+        }
+
+        #selected-treatment-info,
+        #total-price {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #6e4e37;
+            font-size: 18px; /* Increased font size */
+        }
+
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6e4e37;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: none;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scroll-to-Top Button -->
+    
+
+    <header>
+        <h1>Your Ayurveda Bookings</h1>
+    </header>
+
+    <main style="padding-left: 50px;width: 600px;">
+        {% if user_bookings %}
+            <ul>
+                {% for booking in user_bookings %}
+                    <li>
+                        <label>{{ forloop.counter }}.</label>
+                        <strong>Treatment:</strong> {{ booking.treatment }}<br><br>
+                        <strong>Date:</strong> {{ booking.booking_date }}<br><br>
+                        <strong>Persons:</strong> {{ booking.persons }}<br><br>
+                        <strong>Total Price:</strong>₹{{ booking.total_price }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No Ayurveda bookings yet. Book your treatment now!</p>
+        {% endif %}
+
+        {% url 'ayurveda details' as ayurveda_url %}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="window.location.href='{{ ayurveda_url }}'">Book Your Appointment</button>
+    </main>
+
+    
+    
+</body>
+</html>

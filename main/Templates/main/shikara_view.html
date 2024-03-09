@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shikara Bookings</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #3498db; /* Background color as fallback */
+            background-image: url("/static/img/shikara.jpg");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid #1caf00;
+        }
+
+        h1 {
+            color: #0a5405; /* Green color for heading */
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 2px solid #1caf00; /* Added border style and color */
+            border-radius: 5px;
+        }
+
+        p {
+            color: #fff;
+            text-align: center;
+        }
+
+        .booking-number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #219653;
+        }
+
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: none;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scrollToTopBtn" onclick="scrollToTop()">Scroll to Top</button>
+
+    <header>
+        <h1>Your Shikara Bookings</h1>
+    </header>
+
+    {% if user_bookings %}
+        <ul>
+            {% for booking in user_bookings %}
+                <li>
+                    <span class="booking-number">{{ forloop.counter }}.</span>
+                    Ride: {{ booking.shikara_ride }}, Date: {{ booking.booking_date }}, Price: ₹{{ booking.price }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bookings yet. Book your Shikara ride now!</p>
+    {% endif %}
+
+    {% url 'shikara' as shikara_url %}
+    <button onclick="window.location.href='{{ shikara_url }}'">Book Your Shikara</button>
+
+    <!-- JavaScript for Scroll-to-Top Button -->
+    <script>
+        // Show/hide scroll-to-top button based on scroll position
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById('scrollToTopBtn').style.display = 'block';
+            } else {
+                document.getElementById('scrollToTopBtn').style.display = 'none';
+            }
+        };
+
+        // Scroll to the top when the button is clicked
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

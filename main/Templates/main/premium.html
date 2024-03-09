@@ -1,0 +1,186 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(45deg, #3498db, #2c3e50, #e74c3c, #1abc9c);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s infinite;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .container {
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        backdrop-filter: blur(5px);
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      select, input, button {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        font-size: 14px;
+      }
+
+      button {
+        background-color: #27ae60;
+        color: #fff;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #219653;
+      }
+
+      #totalPrice {
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    </style>
+    <title>Premium Houseboat Booking</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+  </head>
+  <body>
+    <form method="post" action="{% url 'premium' %}">
+      {% csrf_token %}
+      <div class="container">
+        <label for="numRooms">Select Number of Rooms:</label>
+        <select id="numRooms" name="numRooms" required>
+          <option value="1">1 Bedroom</option>
+          <option value="2">2 Bedroom</option>
+          <option value="3">3 Bedroom</option>
+          <option value="4">4 Bedroom</option>
+          <option value="5">5 Bedroom</option>
+        </select>
+
+        <label for="numPersons">Number of Persons:</label>
+        <input type="number" id="numPersons" name="numPersons" placeholder="Enter the number of persons" required>
+
+        <!-- Start Date -->
+        <label for="startDate">Check In:</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <!-- End Date -->
+        <label for="endDate">Check Out:</label>
+        <input type="date" id="endDate" name="endDate" required>
+
+        <button type="button" onclick="calculateTotal()">Calculate Total</button>
+        <input type="hidden" id="hiddenTotalPrice" name="hiddenTotalPrice">
+        <div id="totalPrice"></div>
+
+        <button onclick="proceedToPayment()" style="margin-top: 20px;">Proceed to Details</button>
+      </div>
+    </form>
+
+    <script>
+    function calculateTotal() {
+          const numRooms = document.getElementById('numRooms').value;
+          const numPersons = document.getElementById('numPersons').value;
+          const startDateInput = document.getElementById('startDate');
+          const endDate = document.getElementById('endDate').value;
+
+          const dayRate = [10000, 15000, 20000, 30000, 37000];
+          const extraPersonRate = 1500;
+
+          // Validate the number of persons
+          if (!numPersons || numPersons <= 0) {
+              alert('Please enter a valid number of persons.');
+              return;
+          }
+
+          // Validate start and end dates
+          const startDate = new Date(startDateInput.value);
+          const currentDate = new Date();
+
+          if (startDate <= currentDate) {
+              alert('Check-in date must be at least the next day.');
+              return;
+          }
+
+          if (!endDate) {
+              alert('Please select both check-in and check-out dates.');
+              return;
+          }
+
+          // Parse the dates
+          const end = new Date(endDate);
+
+          // Check if end date is after start date
+          if (startDate >= end) {
+              alert('Check-out date must be after the check-in date.');
+              return;
+          }
+
+          let total = dayRate[numRooms - 1]; // Day rate for the selected number of rooms
+
+          // Additional charge for extra persons
+          if (numPersons > 2) {
+              total += (numPersons - 2) * extraPersonRate;
+          }
+
+          // Ensure total is not negative
+          total = Math.max(0, total);
+
+          // Add date calculation logic here, e.g., calculating the number of days between start and end
+
+          document.getElementById('hiddenTotalPrice').value = total;
+
+          // Display the total in the div
+          document.getElementById('totalPrice').innerText = `Total Price: Rs. ${total}`;
+      }
+
+      function proceedToPayment() {
+          const total = document.getElementById('hiddenTotalPrice').value;
+
+          // Proceed to payment only if a total is calculated
+          if (total && !isNaN(parseFloat(total)) && parseFloat(total) > 0) {
+              // Replace the following line with a placeholder for the details URL
+              window.location.href = "{% url 'details' %}";
+              // Add your payment logic here
+          } else {
+              alert('Please calculate the total first.');
+          }
+      }
+
+  </script>
+
+</body>

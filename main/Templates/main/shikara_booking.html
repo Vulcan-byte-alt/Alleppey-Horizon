@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url("/static/img/shikara.jpg");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: rgb(255 255 255 / 3%);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        select, input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #219653;
+        }
+
+        #totalPrice {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #219653; /* Wavy color effect */
+            animation: wavyColor 1s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes wavyColor {
+            0%, 100% {
+                color: #219653;
+            }
+            50% {
+                color: #4b3624;
+            }
+        }
+    </style>
+
+    <title>Alleppey Shikara Cruise Booking</title>
+    <link type="image/x-icon" rel="icon" href="/static/img/favicon.ico">
+</head>
+<body>
+    <form method="post" action="{% url 'shikara booking'  %}">
+        {% csrf_token %}
+        <div class="container">
+            <label for="rideType">Select Shikara Ride:</label>
+            <select id="rideType" name="rideType" required>
+                <option value="dayCruise">Day Cruise Shikara Cruise</option>
+                <option value="sunriseCruise">Sunrise Shikara Cruise</option>
+                <option value="lunchCruise">Lunch Shikara Cruise</option>
+                <option value="sunsetCruise">Sunset Shikara Cruise</option>
+                <option value="honeymoonCruise">Honeymoon Shikara Cruise</option>
+                <option value="fullDayCruise">Full Day Shikara Cruise</option>
+            </select>
+
+            <label for="bookingDate">Select Booking Date:</label>
+            <input type="date" id="bookingDate" name="bookingDate" min="" required>
+
+            <button type="button" onclick="displayPrice()">Display Price</button>
+            <br>
+            <br>
+            <div id="ridePrice" onclick="proceedToPayment()">Click to View Total Price</div>
+            <br>
+            <input type="hidden" id="hidden_total_price" name="hidden_total_price">
+            <button type="submit" id="proceedToPaymentBtn" disabled>Proceed to Payment</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('proceedToPaymentBtn').disabled = true;
+
+        // Calculate the minimum selectable date for the booking date input
+        const today = new Date();
+        today.setDate(today.getDate() + 1); // Set the minimum date to the next day
+        const minDate = today.toISOString().split('T')[0];
+        document.getElementById('bookingDate').min = minDate;
+
+        function displayPrice() {
+            const bookingDate = document.getElementById('bookingDate').value;
+
+            if (!bookingDate) {
+                alert('Please select a valid booking date.');
+                return;
+            }
+
+            const rideType = document.getElementById('rideType').value;
+            let price = 0;
+
+            switch (rideType) {
+                case 'dayCruise':
+                    price = 800 * 5; // Assuming a base rate of Rs. 800 per hour for a minimum of 5 hours
+                    break;
+                case 'sunriseCruise':
+                    price = 800 * 3; // Assuming a base rate of Rs. 800 per hour for a minimum of 3 hours
+                    break;
+                case 'lunchCruise':
+                    price = 800 * 4; // Assuming a base rate of Rs. 800 per hour for a minimum of 4 hours
+                    break;
+                case 'sunsetCruise':
+                    price = 800 * 2; // Assuming a base rate of Rs. 800 per hour for a minimum of 2 hours
+                    break;
+                case 'honeymoonCruise':
+                    price = 800 * 8; // Assuming a base rate of Rs. 800 per hour for a minimum of 8 hours
+                    break;
+                case 'fullDayCruise':
+                    price = 800 * 8; // Assuming a base rate of Rs. 800 per hour for a full day (8 hours)
+                    break;
+                default:
+                    price = 0;
+            }
+
+            // Update the 'ridePrice' div with the calculated total price
+            document.getElementById('ridePrice').innerHTML = `<div id="totalPrice">Total Price: ₹${price.toFixed(2)}</div>`;
+
+            // Set the 'hidden_total_price' value
+            document.getElementById('hidden_total_price').value = price;
+
+            // Enable the proceedToPaymentBtn
+            document.getElementById('proceedToPaymentBtn').disabled = false;
+        }
+
+        function proceedToPayment() {
+            // Retrieve the total price from the hidden input
+            const hiddenTotalPriceInput = document.getElementById('hidden_total_price');
+            const totalPrice = hiddenTotalPriceInput.value;
+
+            // Check if the total price is available
+            if (!totalPrice || isNaN(totalPrice)) {
+                alert('Please click "Display Price" before proceeding to payment.');
+                return;
+            }
+
+            // Now you can proceed with your payment logic
+            // For example, you can submit the form or perform any other action
+            // ...
+
+            // If you want to prevent the default form submission, uncomment the following line
+            // event.preventDefault();
+        }
+    </script>
+</body>
+</html>
