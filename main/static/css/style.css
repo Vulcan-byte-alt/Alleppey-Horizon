@@ -511,25 +511,27 @@ border-radius: 8px; /* Set the border radius value as needed */
   overflow: hidden;
 }
 
-#hero .video-container {
+#hero .image-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-size: cover; /* Ensure the image covers the full container */
+  background-position: center; /* Center the image */
 }
 
-#hero .video-container video {
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
+#hero .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the container with the image */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 
 
 
