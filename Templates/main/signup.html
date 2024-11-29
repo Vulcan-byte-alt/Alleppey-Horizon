@@ -195,6 +195,17 @@
                 // Call function to hide loading screen without delay
                 hideLoadingScreen();
             });
+
+            document.getElementById("username").addEventListener("input", function(event) {
+                let inputValue = event.target.value;
+                let regex = /^[a-zA-Z\s]+$/; // Regular expression to match alphabetic characters and spaces
+                if (!regex.test(inputValue)) {
+                    event.target.setCustomValidity("Please enter only alphabetic characters and spaces.");
+                } else {
+                    event.target.setCustomValidity("");
+                }
+            });
+
     </script>
      
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

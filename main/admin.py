@@ -16,7 +16,8 @@ from .models import HotelBooking
 from .models import ResortBooking
 from .models import HotelPayment
 from .models import ResortPayment
-from .models import Contact
+from .models import contact
+
 
 # CustomUserAdmin
 @admin.register(CustomUser)
@@ -66,7 +67,7 @@ class ResortBooking(admin.ModelAdmin):
     search_fields = ('user__username',)
     list_filter = ('CheckIn',)
 
-@admin.register(Contact)
+@admin.register(contact)
 class Contact(admin.ModelAdmin):
     list_display = ('user','name','email','subject','message')
     search_fields = ('user__username','email')

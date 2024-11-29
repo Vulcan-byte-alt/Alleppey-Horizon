@@ -358,8 +358,25 @@
                         this.style.borderColor = 'transparent';
                     });
                 }
+
+            
             });
         </script>
+        <script>
+            
+            var today = new Date();
+
+            
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            
+            var formattedDate = tomorrow.toISOString().substr(0, 10);
+
+            
+            document.getElementById('date').min = formattedDate;
+        </script>
+
     </form>
     <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

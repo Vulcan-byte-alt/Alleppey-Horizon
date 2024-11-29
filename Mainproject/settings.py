@@ -15,10 +15,11 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from dotenv import load_dotenv
+import dotenv
 import os
 
-load_dotenv()
+dotenv.load_dotenv()
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -36,7 +37,7 @@ LOGIN_URL = 'signin'
 
 # Application definition
 
-SITE_ID = 3
+SITE_ID = 5
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -69,7 +70,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SOCIALACCOUNT_LOGIN_ON_GET=True 
+SOCIALACCOUNT_LOGIN_ON_GET = True 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

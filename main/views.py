@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from .models import AyurvedaBooking
 from django.urls import reverse
-from .models import Contact
+from .models import contact
 from .models import CustomUser
 from .models import HotelPayment
 from .models import HotelBooking
@@ -27,6 +27,7 @@ from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
+from django.shortcuts import redirect
 from django.views.generic.edit import UpdateView, DeleteView
 
 
@@ -39,7 +40,7 @@ def home(request):
 def view(request):
     return render(request, "main/view.html", {})
 
-from django.shortcuts import redirect
+
 
 def signin(request):
     if request.method == 'POST':
@@ -623,7 +624,8 @@ def resort_payment(request, booking_id):
 
     return render(request, "main/resort_payment.html", {'resort': booking})
 
-def contact(request):
+@login_required
+def contacts(request):
     if request.method == "POST":
         user = request.user
         name = request.POST.get("name")
@@ -631,10 +633,10 @@ def contact(request):
         subject = request.POST.get("subject")
         message = request.POST.get("message")
 
-        contact = Contact(user=user, name=name, email=email, subject=subject, message=message)
-        contact.save()
+        feedback = contact(user=user, name=name, email=email, subject=subject, message=message)
+        feedback.save()
 
-        messages.success(request, 'Your message was submitted successfully.')
+        messages.success(request, 'Your feedback was submitted successfully.')
         request.session['form_submitted'] = True
         return redirect('home')
     

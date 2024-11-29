@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Alleppey Horizons</title>
+  <title>Alleppey Horizon</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -63,14 +63,14 @@
   
     <div class="container d-flex align-items-center justify-content-lg-between"  style="margin-left: 73.5px;">
 
-        <h1 class="logo me-auto me-lg-0"><a href="{% url 'home' %}">Alleppey Horizons<span>.</span></a></h1>
+        <h1 class="logo me-auto me-lg-0"><a href="{% url 'home' %}">Alleppey Horizon<span>.</span></a></h1>
       
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
         <li><a class="nav-link scrollto" href="#about">About</a></li>
         <li><a class="nav-link scrollto" href="#services">Services</a></li>
-        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+        <li><a class="nav-link scrollto " href="#portfolio">Gallery</a></li>
         <li><a class="nav-link scrollto" href="{% url 'account' %}">Profile</a></li>
         <li class="dropdown"><a href="#"><span>Bookings</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
@@ -132,9 +132,19 @@
 
   <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-left justify-content-left">
+      <!-- for video
+      <div class="video-container" data-aos="fade-up">
+            <video width="100%" height="auto" autoplay muted loop class="hero-video">
+                <source src="{% static 'img/Alleppey.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+      </div>
+      -->
+      
         <div class="image-container" data-aos="fade-up">
             <img src="{% static 'img/bg5.png' %}" loading="lazy">
         </div>
+        
         <h1 class="mb-5" style="position: absolute; z-index: 1; text-align: left; padding-left: 115px;">
             <span class="d-block">
                 <br><br><br><br>Let's Enjoy Your
@@ -369,8 +379,8 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Portfolio</h2>
-          <p>Check our Portfolio</p>
+          <h2>Gallery</h2>
+          <p>Check our Gallery</p>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -701,7 +711,7 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                            <input type="text" class="form-control"  name="name" id="name" placeholder="Your Name" required>
                         </div>
                         <div class="col-md-6 form-group mt-3 mt-md-0">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
@@ -711,9 +721,9 @@
                         <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
                     </div>
                     <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        <textarea class="form-control" name="message" rows="5" placeholder="Feedback" required></textarea>
                     </div>
-                    <div class="text-center"><button type="submit">Send Message</button></div>
+                    <div class="text-center"><button type="submit" onclick="showLoginMessage();">Send Feedback</button></div>
                 </form>
                 <br>
                 {% if messages %}
@@ -785,8 +795,9 @@
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
             <p>Subscribe to our newsletter for the latest  updates and offers from us.</p>
-            <form action="" method="post">
-              <input type="email" name="email" placeholder="example@gmail.com"><input type="submit" value="Subscribe">
+            <form action="{%url 'page_development' %}" method="post">
+              {% csrf_token %}
+              <input type="email" name="email" placeholder="example@gmail.com" required><input type="submit" value="Subscribe">
             </form>
 
           </div>
@@ -918,7 +929,22 @@
           }
       }
 
+      
+      function showBookingForm() {
+         var mainContent = document.querySelector('main');
 
+         // Remove the opacity property to trigger the animation
+         mainContent.style.opacity = '1';
+        }
+
+        function showLoginMessage() {
+          alert("Please login to give feedback.");
+        }
+
+        window.onload = function () {
+          showBookingForm();
+        };
+           
 
 
 

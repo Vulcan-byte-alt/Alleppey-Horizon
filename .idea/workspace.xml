@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2b1aa7c1-a5c7-43a0-a35a-e386012ed83a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Mainproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mainproject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/beach_resorts.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/beach_resorts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/deluxe.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/deluxe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/palace.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/palace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/raheem.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/raheem.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/ramada.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/ramada.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/regency.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/regency.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/signin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/signin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Templates/main/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/Templates/main/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collected_static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/collected_static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0002_hotelbooking_rooms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0003_alter_hotelbooking_rooms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0004_alter_hotelbooking_rooms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0005_resortbooking.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0006_rename_hotel_resortbooking_resort.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0007_rename_date_hotelbooking_checkindate_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0008_rename_checkindate_hotelbooking_checkin_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0009_hotelbooking_payment_completed_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0010_alter_hotelpayment_booking_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0011_contact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Vulcan-byte-alt"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Vulcan-byte-alt/MainProject.git",
+    "accountId": "5f6ee316-02cd-4e13-b1c1-edd51dc8d0c3"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2p4aEcEBmLTC9wlCAPijvzcPdEm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.admin.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-abccbe9d933a-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.20224.428" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b1aa7c1-a5c7-43a0-a35a-e386012ed83a" name="Changes" comment="" />
+      <created>1732027691042</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732027691042</updated>
+    </task>
+    <servers />
+  </component>
+</project>

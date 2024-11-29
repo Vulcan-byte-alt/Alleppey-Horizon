@@ -231,7 +231,7 @@ class ResortPayment(models.Model):
     def __init__(self, *args, **kwargs):
         super(ResortPayment, self).__init__(*args, **kwargs)
 
-class Contact(models.Model):
+class contact(models.Model):
     def get_default_user():
         return CustomUser.objects.first()
 
@@ -240,3 +240,6 @@ class Contact(models.Model):
     email = models.EmailField(max_length=254)
     subject = models.TextField()
     message = models.TextField()
+    class Meta:
+        verbose_name = 'Feedback'
+        verbose_name_plural = 'Feedbacks'

@@ -302,6 +302,21 @@
     </script>
 
     <script>
+            
+            var today = new Date();
+
+            
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            
+            var formattedDate = tomorrow.toISOString().substr(0, 10);
+
+            
+            document.getElementById('date').min = formattedDate;
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var canvas = document.getElementById('particles');
             var ctx;
